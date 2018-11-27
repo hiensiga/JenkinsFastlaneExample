@@ -6,10 +6,33 @@ ENV['SLACK_URL'] = "https://hooks.slack.com/services/TD60FEJBW/BECGUPWM9/ftZn2m9
 
 
 platform :ios do
-   lane :example do
+   	lane :example do
       puts("this is my first 🚀 lane")
 
       slack(message: "Successfully deployed daily.")
-      
-   end
+
+   	end
+
+	lane :deploy_daily do
+
+		puts("this is deploy_daily")
+		
+	    ensure_git_status_clean
+	    ensure_git_branch(branch: "master")
+
+	    update_translations
+
+	    cocoapods 
+
+	    clean_build_artifacts
+
+	    slack(message: "Successfully deployed daily.")
+
+	    push_to_git_remote
+	end
+
+  error do |lane, exception|
+     slack(message: exception.message, success: false)
+  end
+
 end
