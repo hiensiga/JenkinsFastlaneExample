@@ -2,8 +2,14 @@ fastlane_version "2.24.0"
 
 default_platform :ios
 
+ENV['SLACK_URL'] = "https://hooks.slack.com/services/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"
+
+
 platform :ios do
    lane :example do
       puts("this is my first 🚀 lane")
+
+      slack(message: "Successfully deployed daily.")
+      
    end
 end
