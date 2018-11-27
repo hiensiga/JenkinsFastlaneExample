@@ -13,6 +13,7 @@ platform :ios do
 
    	end
 
+	desc "deploy_daily after 18:00"
 	lane :deploy_daily do
 
 		puts("this is deploy_daily")
